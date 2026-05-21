@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>曉雯店長專屬・士林元氣沐妍所・社群特助</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Noto Sans TC', 'PingFang TC', sans-serif; background: #fdf4fb; color: #2d3748; padding: 20px 16px 60px; }
+        .page { max-width: 1200px; margin: 0 auto; }
+
+        .header { text-align: center; margin-bottom: 24px; }
+        .header h1 { font-size: 24px; font-weight: 900; color: #2d3748; line-height: 1.4; }
+        .header h1 span { color: #9b3a8a; }
+        .header p { font-size: 11px; color: #a0aec0; margin-top: 6px; letter-spacing: 1.5px; }
+
+        .main-layout { display: grid; grid-template-columns: 340px 1fr; gap: 20px; align-items: start; }
+        @media (max-width: 860px) { .main-layout { grid-template-columns: 1fr; } }
+
+        .left-card { background: #fff; border-radius: 36px; padding: 28px 24px; box-shadow: 0 4px 24px rgba(155,58,138,0.08); border: 1px solid rgba(155,58,138,0.1); }
+
+        .api-wrap { background: #fdf0fb; border: 1.5px solid #e8b8e2; border-radius: 16px; padding: 14px 16px; margin-bottom: 24px; }
+        .api-label { font-size: 12px; font-weight: 900; color: #9b3a8a; margin-bottom: 8px; }
+        .api-row { display: flex; gap: 8px; }
+        .api-input { flex: 1; padding: 10px 14px; border: 1.5px solid #e2e8f0; border-radius: 12px; font-size: 13px; background: #fff; color: #2d3748; letter-spacing: 2px; font-family: inherit; transition: all 0.2s; }
+        .api-input:focus { outline: none; border-color: #9b3a8a; box-shadow: 0 0 0 3px rgba(155,58,138,0.1); }
+        .eye-btn { background: #f7f7f7; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 8px 12px; cursor: pointer; font-size: 15px; color: #a0aec0; transition: all 0.2s; }
+        .eye-btn:hover { border-color: #9b3a8a; color: #9b3a8a; }
+        .api-hint { font-size: 11px; color: #a0aec0; margin-top: 7px; line-height: 1.6; }
+        .api-hint a { color: #9b3a8a; font-weight: 700; text-decoration: none; }
+
+        .menu-header { font-size: 20px; font-weight: 900; color: #2d3748; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+        .style-list { display: flex; flex-direction: column; gap: 14px; margin-bottom: 28px; }
+        .style-btn { width: 100%; padding: 22px 20px; border-radius: 22px; font-size: 17px; font-weight: 900; font-family: inherit; cursor: pointer; transition: all 0.25s; text-align: center; border: none; line-height: 1.3; }
+        .style-btn.inactive { background: #f5f5f7; color: #2d3748; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .style-btn.inactive:hover { background: #fff; box-shadow: 0 4px 16px rgba(155,58,138,0.15); color: #9b3a8a; }
+        .style-btn.active { background: linear-gradient(135deg, #9b3a8a, #c44fb5); color: #fff; box-shadow: 0 6px 24px rgba(155,58,138,0.4); transform: translateY(-1px); }
+        .style-btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
+
+        .tool-label { font-size: 11px; font-weight: 900; color: #a0aec0; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 10px; }
+        .tools-row { display: flex; gap: 8px; margin-bottom: 6px; }
+        .tool-link { flex: 1; display: flex; align-items: center; justify-content: center; gap: 5px; padding: 11px 6px; border-radius: 14px; font-size: 13px; font-weight: 800; text-decoration: none; color: #fff; transition: all 0.2s; }
+        .tool-link:hover { transform: translateY(-2px); filter: brightness(1.1); }
+        .t-gemini  { background: linear-gradient(135deg,#4285F4,#1a6cf5); box-shadow: 0 3px 12px rgba(66,133,244,0.3); }
+        .t-chatgpt { background: linear-gradient(135deg,#10a37f,#0d8c6b); box-shadow: 0 3px 12px rgba(16,163,127,0.3); }
+        .t-fb      { background: linear-gradient(135deg,#1877f2,#0a5dc2); box-shadow: 0 3px 12px rgba(24,119,242,0.3); }
+        .t-ig      { background: linear-gradient(135deg,#f58529,#dd2a7b,#8134af); box-shadow: 0 3px 12px rgba(221,42,123,0.3); }
+        .t-threads { background: linear-gradient(135deg,#555,#111); box-shadow: 0 3px 12px rgba(0,0,0,0.25); }
+        .tools-hint { font-size: 11px; color: #c0c8d8; text-align: center; margin-top: 5px; }
+
+        .right-area { display: flex; flex-direction: column; gap: 14px; }
+        .status-bar { background: #fdf0fb; border: 1.5px solid #e8b8e2; border-radius: 16px; padding: 14px 18px; color: #9b3a8a; font-weight: 900; font-size: 14px; text-align: center; display: none; }
+        .cols-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+        @media (max-width: 860px) { .cols-grid { grid-template-columns: 1fr; } .tools-row { flex-wrap: wrap; } .tool-link { flex: 1 1 40%; } }
+        .col { background: #fff; border-radius: 24px; padding: 20px; display: flex; flex-direction: column; box-shadow: 0 4px 16px rgba(0,0,0,0.04); min-height: 360px; border: 1px solid #f5e8f5; }
+        .col-fb { border-top: 5px solid #1877f2; }
+        .col-ig { border-top: 5px solid #e1306c; }
+        .col-threads { border-top: 5px solid #3d3d3d; }
+        .col-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid #f0f4f8; }
+        .col-name { font-weight: 900; font-size: 13px; font-style: italic; }
+        .n-fb { color: #1877f2; }
+        .n-ig { color: #e1306c; }
+        .n-threads { color: #3d3d3d; }
+        .copy-btn { background: #fff; border: 1.5px solid #e2e8f0; border-radius: 20px; padding: 4px 14px; font-size: 11px; font-weight: 900; color: #a0aec0; cursor: pointer; font-family: inherit; transition: all 0.2s; }
+        .copy-btn:hover { background: #9b3a8a; color: #fff; border-color: #9b3a8a; }
+        .output-box { flex: 1; background: #fefaff; border: 1.5px solid #edf2f7; border-radius: 14px; padding: 14px; font-size: 13.5px; line-height: 1.8; white-space: pre-wrap; color: #4a5568; overflow-y: auto; min-height: 280px; }
+    </style>
+</head>
+<body>
+<div class="page">
+    <div class="header">
+        <h1>⚡ <span>曉雯店長</span> 專屬<br>士林元氣沐妍所・社群特助 #整點新雯</h1>
+        <p>青創創業家・溫暖系姐姐・健富美生活圈掌舵者</p>
+    </div>
+
+    <div class="main-layout">
+        <div class="left-card">
+
+            <div class="api-wrap">
+                <div class="api-label">🔑 Gemini API Key</div>
+                <div class="api-row">
+                    <input type="password" id="userApiKey" class="api-input" placeholder="AIzaSy...">
+                    <button class="eye-btn" onclick="toggleKey()">👁</button>
+                </div>
+                <div class="api-hint">沒有金鑰？<a href="https://aistudio.google.com/app/apikey" target="_blank">點此免費申請</a>（每天 1,500 次免費）</div>
+            </div>
+
+            <div class="menu-header">🚀 風格選單</div>
+            <div class="style-list">
+                <button class="style-btn inactive" id="btn-beauty" onclick="generate('beauty')">🎯 元氣沐妍・預約變美</button>
+                <button class="style-btn inactive" id="btn-story"  onclick="generate('story')">🌸 店長日常・整點新雯</button>
+                <button class="style-btn inactive" id="btn-health" onclick="generate('health')">💡 健富美學・內外調理</button>
+                <button class="style-btn inactive" id="btn-biz"    onclick="generate('biz')">🤝 青創思維・說明書索取</button>
+            </div>
+
+            <div class="tool-label">🤖 AI 潤飾工具</div>
+            <div class="tools-row" style="margin-bottom:16px;">
+                <a href="https://gemini.google.com/" target="_blank" class="tool-link t-gemini">✦ Gemini</a>
+                <a href="https://chatgpt.com/" target="_blank" class="tool-link t-chatgpt">⚡ ChatGPT</a>
+            </div>
+
+            <div class="tool-label">📲 直接發文</div>
+            <div class="tools-row">
+                <a href="https://www.facebook.com/" target="_blank" class="tool-link t-fb">f FB</a>
+                <a href="https://www.instagram.com/" target="_blank" class="tool-link t-ig">📷 IG</a>
+                <a href="https://www.threads.net/" target="_blank" class="tool-link t-threads">@ TH</a>
+            </div>
+            <div class="tools-hint">複製文案 → 點平台 → 貼上發文</div>
+
+        </div>
+
+        <div class="right-area">
+            <div id="statusBar" class="status-bar"></div>
+            <div class="cols-grid">
+                <div class="col col-fb">
+                    <div class="col-head"><span class="col-name n-fb">FB 青創觀點長文版</span><button class="copy-btn" onclick="copyCol('out-fb',this)">複製</button></div>
+                    <div id="out-fb" class="output-box">點擊左側按鈕開始生成...</div>
+                </div>
+                <div class="col col-ig">
+                    <div class="col-head"><span class="col-name n-ig">IG 潮流精簡版</span><button class="copy-btn" onclick="copyCol('out-ig',this)">複製</button></div>
+                    <div id="out-ig" class="output-box">點擊左側按鈕開始生成...</div>
+                </div>
+                <div class="col col-threads">
+                    <div class="col-head"><span class="col-name n-threads">Threads 金句互動版</span><button class="copy-btn" onclick="copyCol('out-threads',this)">複製</button></div>
+                    <div id="out-threads" class="output-box">點擊左側按鈕開始生成...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+const PERSONA = `你現在要完全化身為「曉雯（#整點新雯）」的專屬社群文案助理。
+
+核心人設背景：
+- 女，20-29歲，現任士林元氣沐妍所店長
+- 從事健康美業13年，服務超過千位客戶
+- 23歲靠精準的「資產使用說明書」賺到人生第一桶金
+- 致力於打造【健・富・美生活圈】
+
+核心風格：
+- 溫暖系姐姐：跨年齡的傾聽陪伴，30-40歲客群也想交心的暖心知己
+- 幽默實戰派：直白潮流白話文，自嘲接地氣，拒絕死板說教
+- 青創創業家：有顏值更有腦袋，分享商業思維、生活質感與激勵思維
+- 常用口頭禪：「順序對輕鬆很多！」「人要活得漂亮，不只是外在，是健康、財務、心靈三個同時穩，活得有底氣。」「我23歲那年賺到第一桶金時，明白了一件事...」
+- 排版偏好：短句流、留白多、營造呼吸感與高質感
+
+嚴格禁止：
+- 禁止提及：直銷、賀寶芙、Herbalife、奶昔、拉人、下線、傳統發大財口號
+- 營養補充品一律包裝為「精準飲食加法」「細胞級內外調理」「打造健富美生活圈的每日儀式」
+- 文案必須設計強烈的留言誘餌（如：底下留言「說明書」、底下留言「想了解」），提高算法權重
+
+平台規則：
+- FB（青創觀點長文版）：短句流排版、觀點分析、邏輯推演、信任感建立，語氣青創且成熟，含金量極高，字數200-350字
+- IG（潮流精簡版）：潮流感生活質感痛點短標題開頭，精簡俐落，引導私訊小盒子或點主頁連結，附指定標籤（#創業 #元氣沐妍所 #整點新雯）加上其他相關hashtag共5-8個
+- Threads（金句互動版）：強烈青創大姐大觀點、直白口語、金句力道強、自嘲接地氣，引發高留言率，字數50-80字`;
+
+const PROMPTS = {
+    beauty: `觸發主題：元氣沐妍・預約變美
+目標：直擊30-40歲目標客群想減重、變漂亮、變健康的痛點，帶動士林店面實體預約。
+寫法：直擊現代人「賺了錢卻沒了健康、氣色垮掉、體態失控」的痛點。以服務過千人的13年美業老手身份，分享如何透過簡單高效的調理重拾自信。結尾強力引導「私訊曉雯預約，來士林讓自己元氣滿滿」。`,
+
+    story: `觸發主題：店長日常・整點新雯
+目標：完全不帶商業推銷，分享曉雯日常生活、青創思維、或店裡與客人的暖心幽默故事。
+寫法：短句流形式，分享自己20幾歲經營實體店的體會、生活質感的追求、或對客人的情感支持。展現溫暖、接地氣且有底氣的女性生活範本。`,
+
+    health: `觸發主題：健富美學・內外調理
+目標：吸引講求高效率、想用正確方法做好健康與體態管理的精準客戶。
+寫法：分享「健康、財務、心靈同時穩」的底層邏輯。強調不要盲目亂減肥，美要由內而外。帶出精準草本科學營養對於細胞修復與代謝的重要性。文末設計互動留言誘餌（如：底下留言「平衡」，我把健富美飲食清單傳給你）。`,
+
+    biz: `觸發主題：青創思維・說明書索取
+目標：吸引想多賺錢、開創副業、翻轉財務狀態的30-40歲潛在合作夥伴。
+寫法：分享商業思維與財商乾貨。用「順序對輕鬆很多！」的觀念，提到自己23歲賺到第一桶金至今仍在使用的「資產使用說明書」。文末強力催化互動留言誘餌（如：底下留言「說明書」，我把高效省力的創業實戰筆記分享給你）。`
+};
+
+function toggleKey() {
+    const el = document.getElementById('userApiKey');
+    el.type = el.type === 'password' ? 'text' : 'password';
+}
+
+async function generate(type) {
+    const userKey = document.getElementById('userApiKey').value.trim();
+    if (!userKey) { alert('請先輸入您的 Gemini API Key！'); return; }
+
+    document.querySelectorAll('.style-btn').forEach(b => { b.classList.remove('active'); b.classList.add('inactive'); b.disabled = true; });
+    document.getElementById('btn-' + type).classList.add('active');
+    document.getElementById('btn-' + type).classList.remove('inactive');
+
+    const status = document.getElementById('statusBar');
+    const fbOut  = document.getElementById('out-fb');
+    const igOut  = document.getElementById('out-ig');
+    const thOut  = document.getElementById('out-threads');
+
+    status.style.display = 'block';
+    status.innerText = '⚡ #整點新雯 爆款文案生成中，請稍候...';
+    fbOut.innerText = '青創觀點長文撰寫中...';
+    igOut.innerText = '潮流精簡版生成中...';
+    thOut.innerText = '金句互動版醞釀中...';
+
+    const prompt = `${PERSONA}\n\n${PROMPTS[type]}\n\n請只回傳 JSON 格式，不要任何 Markdown 標記或說明文字：\n{"fb":"完整FB青創觀點長文","ig":"完整IG潮流精簡文含hashtag","threads":"完整Threads金句互動短文"}`;
+
+    try {
+        const res = await fetch(
+            `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${userKey}`,
+            {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+            }
+        );
+        const data = await res.json();
+        if (data.error) {
+            if (data.error.code === 429) throw new Error('RATE_LIMIT');
+            if (data.error.code === 400 || data.error.code === 403) throw new Error('KEY_INVALID');
+            throw new Error(data.error.message);
+        }
+        let raw = data.candidates[0].content.parts[0].text;
+        raw = raw.replace(/```json|```/gi, '').trim();
+        const result = JSON.parse(raw);
+        fbOut.innerText = result.fb      || '生成失敗，請再試一次';
+        igOut.innerText = result.ig      || '生成失敗，請再試一次';
+        thOut.innerText = result.threads || '生成失敗，請再試一次';
+        status.style.display = 'none';
+    } catch (err) {
+        console.error(err);
+        status.style.display = 'none';
+        fbOut.innerText = igOut.innerText = thOut.innerText = '❌ 發生錯誤，請再試一次';
+        if (err.message === 'KEY_INVALID') {
+            alert('【金鑰無效】\n請重新去 aistudio.google.com 申請新的 API Key。');
+        } else if (err.message === 'RATE_LIMIT') {
+            alert('【頻率限制】\n請等 60 秒後再按一次。');
+        } else {
+            alert('【錯誤訊息】' + err.message);
+        }
+    } finally {
+        document.querySelectorAll('.style-btn').forEach(b => b.disabled = false);
+    }
+}
+
+function copyCol(id, btn) {
+    const text = document.getElementById(id).innerText;
+    if (!text || text.includes('...') || text.startsWith('❌') || text.startsWith('點擊')) return;
+    navigator.clipboard.writeText(text).then(() => {
+        const orig = btn.innerText;
+        btn.innerText = '✓ 已複製';
+        setTimeout(() => btn.innerText = orig, 2000);
+    });
+}
+</script>
+</body>
+</html>
